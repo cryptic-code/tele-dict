@@ -66,7 +66,7 @@ def unrecognized_handler(chat_id: telegram.Chat.id):
     bot.send_message(chat_id=chat_id, text=get_reply('UNRECOGNIZED'), parse_mode='markdown')
 
 def attachment_handler(chat_id: telegram.Chat.id):
-    bot.send_message(chat_id=chat_id, text=get_reply('ATTACHMETS_ERR'), parse_mode='markdown')
+    bot.send_message(chat_id=chat_id, text=get_reply('ATTACHMENTS_ERR'), parse_mode='markdown')
 
 @app.route("/")
 def index():
@@ -79,16 +79,19 @@ def handle_request():
         update = telegram.Update.de_json(request.get_json(force=True), bot)
 
         chat_id = update.effective_chat.id
-        msg_id = update.effective_message.message_id
-
+        
         if update.edited_message:
             edits_handler(chat_id)
             return "OK"
 
-        if update.message.effective_attachment:
+        if update.chat_member or update.my_chat_member:
+            return "OK"
+
+        if update.effective_message.effective_attachment:
             attachment_handler(chat_id)
             return "OK"
 
+        msg_id = update.effective_message.message_id
         msg_txt = update.message.text.encode('utf-8').decode()
 
         logger.info(f"Received message: {msg_txt}")
