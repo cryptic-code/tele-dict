@@ -35,8 +35,12 @@ MESSAGES:
 
   UNRECOGNIZED: |
     beep. bop. beep. 🤖
+
     I couldn't understand you.
-    Send `/help` to know about commands.
+    Send `/help` to know the proper syntax.
+  
+  ATTACHMENTS_ERR: |
+    Attachments aren't supported, my friend.
 
   PHONETICS_MSG: |
     *{defined_word}*

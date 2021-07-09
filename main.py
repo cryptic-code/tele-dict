@@ -60,13 +60,13 @@ def dict_req_handler(msg_txt: str, chat_id: telegram.Chat.id) -> None:
             bot.send_message(chat_id=chat_id, text=get_reply("WORD_ERR"), parse_mode="markdown")
 
 def edits_handler(chat_id: telegram.Chat.id):
-    bot.send_message(chat_id=chat_id, text="I do not care about edited messages 😛", parse_mode='markdown')
+    bot.send_message(chat_id=chat_id, text=get_reply('EDITS_REPLY'), parse_mode='markdown')
 
 def unrecognized_handler(chat_id: telegram.Chat.id):
     bot.send_message(chat_id=chat_id, text=get_reply('UNRECOGNIZED'), parse_mode='markdown')
 
 def attachment_handler(chat_id: telegram.Chat.id):
-    bot.send_message(chat_id=chat_id, text='attachments are not supported.', parse_mode='markdown')
+    bot.send_message(chat_id=chat_id, text=get_reply('ATTACHMETS_ERR'), parse_mode='markdown')
 
 @app.route("/")
 def index():
