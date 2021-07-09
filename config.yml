@@ -1,0 +1,53 @@
+MESSAGES:
+  START_MSG: |
+    Howdy! 👋
+    
+    Please note that this bot is still in trial.
+    
+    This is a simple bot that brings dictionary to your Telegram. 🤖
+    
+    Send a normal message with
+    `define <space> <your word>`
+    syntax to see the magic. 🪄
+
+    Send `/help` anytime to refresh your memory ;)
+
+  HELP_MSG: |
+    Howdy! 👋
+
+    This is a simple bot that brings dictionary to your Telegram. ;) 🤖
+
+    Send a normal message with
+    `define <space> <your word>`
+    syntax to see the magic. 🪄
+
+  DEFINE_ERR: |
+    Define is not a command ❗
+
+    Use the following syntax in a normal message:
+    `define <space> <yourword>`
+
+  WORD_ERR: |
+    Your word is invalid❗ Try a different word.
+
+  EDITS_REPLY: |
+    I do not care about edited messages. 😛
+
+  UNRECOGNIZED: |
+    beep. bop. beep. 🤖
+    I couldn't understand you.
+    Send `/help` to know about commands.
+
+  PHONETICS_MSG: |
+    *{defined_word}*
+    _{phonetic_txt}_ [🔊]({phonetic_audio})
+
+  DEFINITION_MSG: |
+    *Part of Speech:*
+    {part_of_speech}
+
+    *Definition:*
+    {definition}
+
+    *Example:*
+    {example}
