@@ -10,6 +10,7 @@ load_dotenv()
 
 TOKEN = os.getenv('TELEGRAM_TOKEN')
 APP_URL = os.getenv('APP_URL')
+ADMIN_PASS = os.getenv('ADMIN_PASS')
 
 API_BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en_US/'
 
@@ -68,10 +69,22 @@ def unrecognized_handler(chat_id: telegram.Chat.id):
 def attachment_handler(chat_id: telegram.Chat.id):
     bot.send_message(chat_id=chat_id, text=get_reply('ATTACHMENTS_ERR'), parse_mode='markdown')
 
-@app.route("/")
+@app.route("/", methods=['POST', 'GET'])
 def index():
-    bot.set_webhook(url=APP_URL+'telegram-dict', drop_pending_updates=True)
-    return "Hello, World!"
+    if request.method == "POST":
+        try:
+            if request.headers['deleteWebhook'] == ADMIN_PASS:
+                bot.delete_webhook(drop_pending_updates=True)
+                return "Bye, bye!"
+        except:
+            return "POST request!?"
+    else:
+        try:
+            if request.headers['setWebhook'] == ADMIN_PASS:
+                bot.set_webhook(url=APP_URL+'telegram-dict', drop_pending_updates=True)
+                return "Hola!"
+        except:
+            return "Hello, World!"
 
 @app.route('/telegram-dict', methods=["POST", "GET"])
 def handle_request():
