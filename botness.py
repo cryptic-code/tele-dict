@@ -1,5 +1,5 @@
 from os import getenv
-from load_config import get_reply
+from read_config import get_reply
 from telegram import Bot, Update
 from telegram.ext import Dispatcher, CommandHandler, CallbackContext, MessageHandler, Filters
 import requests
