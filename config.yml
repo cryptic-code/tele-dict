@@ -2,8 +2,6 @@ MESSAGES:
   START_CMD: |
     Howdy! 👋
     
-    Please note that this bot is still in trial.
-    
     This is a simple bot that brings dictionary to your Telegram. 🤖
     
     Send a normal message with the following syntax to see the magic. 🪄
@@ -53,3 +51,6 @@ MESSAGES:
   
   ATTACHMENT_ERR: |
     Attachments aren't supported, my friend.
+
+  APP_ERR: |
+    Seems like something's wrong. Drop me a message at @cryptic_code and I will fix it ASAP.

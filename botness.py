@@ -12,25 +12,25 @@ dp = Dispatcher(bot, None, workers=0)
 API_BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en_US/'
 
 def start_cmd_handler(update: Update, context: CallbackContext) -> None:
-    """ Handle `/start` command """
+    """ Handle `/start` command. """
 
     reply = get_reply('START_CMD')
     context.bot.send_message(chat_id=update.effective_message.chat_id, text=reply, parse_mode='markdown')
 
 def define_cmd_handler(update: Update, context: CallbackContext) -> None:
-    """ Handle /define coommand """
+    """ Handle /define commmand. """
 
     reply = get_reply('DEFINE_CMD')
     context.bot.send_message(chat_id=update.effective_message.chat_id, text=reply, parse_mode='markdown')
 
 def help_cmd_handler(update: Update, context: CallbackContext) -> None:
-    """ Handle /help command """
+    """ Handle /help command. """
 
     reply = get_reply('HELP_CMD')
     context.bot.send_message(chat_id=update.effective_message.chat_id, text=reply, parse_mode='markdown')
 
 def dict_req_handler(update: Update, context: CallbackContext) -> None:
-    """ Handle `define <word>` message """
+    """ Handle `define <word>` message. """
 
     chat_id = update.effective_message.chat_id
     msg_txt = update.effective_message.text.encode('utf-8').decode()
@@ -76,10 +76,16 @@ def attachment_handler(update: Update, context: CallbackContext) -> None:
     
     context.bot.send_message(chat_id=update.effective_message.chat_id, text=get_reply('ATTACHMENT_ERR'), parse_mode='markdown')
 
+def error_handler(update: Update, context: CallbackContext) -> None:
+    """ Handle application errors. """
+
+    context.bot.send_message(chat_id=update.effective_message.chat_id, text=get_reply('APP_ERR'), parse_mode='markdown')
+
 dp.add_handler(CommandHandler(command='start', callback=start_cmd_handler, filters=(~Filters.update.edited_message)))
 dp.add_handler(CommandHandler(command='define', callback=define_cmd_handler, filters=(~Filters.update.edited_message)))
 dp.add_handler(CommandHandler(command='help', callback=help_cmd_handler, filters=(~Filters.update.edited_message)))
-dp.add_handler(MessageHandler(filters=(Filters.text & (~Filters.command) & (~Filters.update.edited_message)), callback=dict_req_handler))
+dp.add_handler(MessageHandler(filters=(Filters.text &~ Filters.command &~ Filters.update.edited_message & Filters.regex('^define.|^Define.')), callback=dict_req_handler))
 dp.add_handler(MessageHandler(filters=(Filters.update.edited_message), callback=edits_handler))
 dp.add_handler(MessageHandler(filters=(Filters.attachment), callback=attachment_handler))
-dp.add_error_handler(unrecognized_handler)
+dp.add_handler(MessageHandler(filters=(Filters.text &~ Filters.update.edited_message &~ Filters.command &~ Filters.regex('^define.|^Define.')), callback=unrecognized_handler))
+dp.add_error_handler(error_handler)

@@ -1,6 +1,6 @@
 from os import getenv
 from custom_logging import get_logger
-from bot_config import bot, dp
+from botness import bot, dp
 from telegram import Update
 from dotenv import load_dotenv
 from flask import Flask, request
