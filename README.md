@@ -15,13 +15,15 @@ pip install -r requirements.txt
 #### Environment Variables
 
 - Your Telegram bot's access token should be set as `TELEGRAM-TOKEN` environment variable.
-- As well as, your app's base url should be set as `APP_URL` environment variable.
+- Your app's base url should be set as `APP_URL` environment variable.
+- As well as an admin password should be set as `ADMIN_PASS` environment variable to set and delete the webhook from the telegram bot, just in case.
 
 Put it in a `.env` file for local development:
 
 ```
-TELEGRAM_TOKEN=< your-token-here >
-APP_URL=< your-url-here >
+TELEGRAM_TOKEN=<your-token-here>
+APP_URL=<your-url-here>
+ADMIN_PASS=<your-password-here>
 ```
 
 #### Webhook Registration
