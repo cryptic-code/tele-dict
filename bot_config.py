@@ -14,19 +14,19 @@ API_BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en_US/'
 def start_cmd_handler(update: Update, context: CallbackContext) -> None:
     """ Handle `/start` command """
 
-    reply = get_reply('START_MSG')
+    reply = get_reply('START_CMD')
     context.bot.send_message(chat_id=update.effective_message.chat_id, text=reply, parse_mode='markdown')
 
 def define_cmd_handler(update: Update, context: CallbackContext) -> None:
     """ Handle /define coommand """
 
-    reply = get_reply('DEFINE_ERR')
+    reply = get_reply('DEFINE_CMD')
     context.bot.send_message(chat_id=update.effective_message.chat_id, text=reply, parse_mode='markdown')
 
 def help_cmd_handler(update: Update, context: CallbackContext) -> None:
     """ Handle /help command """
 
-    reply = get_reply('HELP_MSG')
+    reply = get_reply('HELP_CMD')
     context.bot.send_message(chat_id=update.effective_message.chat_id, text=reply, parse_mode='markdown')
 
 def dict_req_handler(update: Update, context: CallbackContext) -> None:
@@ -37,7 +37,7 @@ def dict_req_handler(update: Update, context: CallbackContext) -> None:
     _, search_key = msg_txt.lower().split("define ")
 
     if len(search_key.split(' ')) > 1:
-        context.bot.send_message(chat_id=chat_id, text=get_reply('WORD_ERR'))
+        context.bot.send_message(chat_id=chat_id, text=get_reply('INVALID_ERR'))
     else:
 
         search_url = API_BASE_URL + search_key
@@ -59,22 +59,22 @@ def dict_req_handler(update: Update, context: CallbackContext) -> None:
 
                 context.bot.send_message(chat_id=chat_id, text=get_reply('DEFINITION_MSG', {'part_of_speech': part_of_speech, 'definition': definition, 'example': example}), parse_mode='markdown')
         else:
-            context.bot.send_message(chat_id=chat_id, text=get_reply("WORD_ERR"), parse_mode="markdown")
+            context.bot.send_message(chat_id=chat_id, text=get_reply("INVALID_ERR"), parse_mode="markdown")
 
 def edits_handler(update: Update, context: CallbackContext) -> None:
     """ Handle edited messages. """
 
-    context.bot.send_message(chat_id=update.effective_message.chat_id, text=get_reply('EDITS_REPLY'), parse_mode='markdown')
+    context.bot.send_message(chat_id=update.effective_message.chat_id, text=get_reply('EDIT_ERR'), parse_mode='markdown')
 
 def unrecognized_handler(update: Update, context: CallbackContext) -> None:
     """ Handle unrecognized messages. """
 
-    context.bot.send_message(chat_id=update.effective_message.chat_id, text=get_reply('UNRECOGNIZED'), parse_mode='markdown')
+    context.bot.send_message(chat_id=update.effective_message.chat_id, text=get_reply('UNRECOGNIZED_ERR'), parse_mode='markdown')
 
 def attachment_handler(update: Update, context: CallbackContext) -> None:
     """ Handle attachments. """
     
-    context.bot.send_message(chat_id=update.effective_message.chat_id, text=get_reply('ATTACHMENTS_ERR'), parse_mode='markdown')
+    context.bot.send_message(chat_id=update.effective_message.chat_id, text=get_reply('ATTACHMENT_ERR'), parse_mode='markdown')
 
 dp.add_handler(CommandHandler(command='start', callback=start_cmd_handler, filters=(~Filters.update.edited_message)))
 dp.add_handler(CommandHandler(command='define', callback=define_cmd_handler, filters=(~Filters.update.edited_message)))

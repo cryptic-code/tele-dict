@@ -1,46 +1,29 @@
 MESSAGES:
-  START_MSG: |
+  START_CMD: |
     Howdy! 👋
     
     Please note that this bot is still in trial.
     
     This is a simple bot that brings dictionary to your Telegram. 🤖
     
-    Send a normal message with
+    Send a normal message with the following syntax to see the magic. 🪄
     `define <space> <your word>`
-    syntax to see the magic. 🪄
 
     Send `/help` anytime to refresh your memory ;)
 
-  HELP_MSG: |
+  HELP_CMD: |
     Howdy! 👋
 
     This is a simple bot that brings dictionary to your Telegram. ;) 🤖
 
-    Send a normal message with
+    Send a normal message with the following syntax to see the magic. 🪄
     `define <space> <your word>`
-    syntax to see the magic. 🪄
-
-  DEFINE_ERR: |
+    
+  DEFINE_CMD: |
     Define is not a command ❗
 
-    Use the following syntax in a normal message:
+    Use the following syntax to send a message:
     `define <space> <yourword>`
-
-  WORD_ERR: |
-    Your word is invalid❗ Try a different word.
-
-  EDITS_REPLY: |
-    I do not care about edited messages. 😛
-
-  UNRECOGNIZED: |
-    beep. bop. beep. 🤖
-
-    I couldn't understand you.
-    Send `/help` to know the proper syntax.
-  
-  ATTACHMENTS_ERR: |
-    Attachments aren't supported, my friend.
 
   PHONETICS_MSG: |
     *{defined_word}*
@@ -55,3 +38,18 @@ MESSAGES:
 
     *Example:*
     {example}
+
+  INVALID_ERR: |
+    Your word is invalid❗ Try a different word.
+
+  EDIT_ERR: |
+    I do not care about edited messages. 😛
+
+  UNRECOGNIZED_ERR: |
+    beep. bop. beep. 🤖
+
+    I couldn't understand you.
+    Send `/help` to know the proper syntax.
+  
+  ATTACHMENT_ERR: |
+    Attachments aren't supported, my friend.
